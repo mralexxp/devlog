@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table mt-4 table-bordered table-striped table-hover">
+    <thead class="table-dark">
+    <tr>
+        <th>ID проекта</th>
+        <th>Название проекта</th>
+        <th>Описание</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for project in projects %}
+    <tr>
+        <td>{{project.id}}</td>
+        <td>{{project.title}}</td>
+        <td>{{project.description}}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-success disabled">Add</button>
+                <button type="button" class="btn btn-warning disabled">Read</button>
+
+                <form action="/project/{{ project.id }}?method=delete"><button type="submit" class="btn btn-danger">Delete</button></form>
+            </div>
+        </td>
+
+    </tr>
+
+    {% empty %}
+    <td colspan="4" class="text-center">Нет проектов</td>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+<form action="/create_project">
+    <button class="btn btn-outline-success" type="submit">Добавить проект</button>
+</form>
+
+{% endblock %}
